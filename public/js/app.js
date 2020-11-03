@@ -1,6 +1,12 @@
 // square size
 const size = 10;
 
+// play field size
+const fieldSize = {
+  height: 40,
+  width: 50,
+};
+
 // movement direction
 const directions = {
   down: 'down',
@@ -17,12 +23,12 @@ let snake = [
     y: 0,
   },
   {
-    x: 0,
-    y: 0 + size,
+    x: 0 + size,
+    y: 0,
   },
   {
-    x: 0,
-    y: 0 + (size * 2),
+    x: 0 + (size * 2),
+    y: 0,
   },
 ];
 
@@ -33,25 +39,27 @@ const foodPosition = {
   y: 400,
 };
 
+let moveLocked = false;
+
 function drawFood(context, snake = []) {
   const foodPositionX = Math.round((Math.random() * 10));
   const foodPositionY = Math.round((Math.random() * 10));
 
   foodPosition.x = foodPositionX * size;
   foodPosition.y = foodPositionY * size;
-  console.log(foodPosition)
+
   context.fillStyle = 'green';
   context.fillRect(
-    foodPositionX * size,
-    foodPositionY * size,
+    foodPosition.x,
+    foodPosition.y,
     size,
     size,
   );
 }
 
 function drawSnake(context) {
-  context.canvas.width = window.innerWidth;
-  context.canvas.height = window.innerHeight;
+  context.canvas.height = fieldSize.height * size;
+  context.canvas.width = fieldSize.width * size;
 
   context.fillStyle = 'green';
 
@@ -64,6 +72,13 @@ function drawSnake(context) {
       size,
     ));
     const head = { ...snake[snake.length - 1] };
+    
+    // check snake body collision
+    snake.slice(0, snake.length - 2).forEach((square) => {
+      if (head.x === square.x && head.y === square.y) {
+        clearInterval(timer);
+      }
+    });
 
     if (direction === directions.right) {
       head.x = head.x + size;
@@ -78,6 +93,15 @@ function drawSnake(context) {
       head.y = head.y - size;
     }
     snake.push(head);
+
+    // check field border collision
+    if (head.x > fieldSize.width * size
+      || head.x < 0
+      || head.y > fieldSize.height * size
+      || head.y < 0) {
+      clearInterval(timer);
+    }
+
     context.clearRect(
       snake[0].x,
       snake[0].y,
@@ -92,6 +116,8 @@ function drawSnake(context) {
       console.log('eating')
       drawFood(context, snake);
     }
+
+    moveLocked = false;
   }, interval);
 }
 
@@ -100,17 +126,23 @@ function handleKeys({ keyCode = 0 }) {
   if (keyCode === 32) {
     clearInterval(timer);
   }
-  if (keyCode === 37 && direction !== directions.right) {
-    direction = directions.left;
-  }
-  if (keyCode === 38 && direction !== directions.down) {
-    direction = directions.up;
-  }
-  if (keyCode === 39 && direction !== directions.left) {
-    direction = directions.right;
-  }
-  if (keyCode === 40 && direction !== directions.up) {
-    direction = directions.down;
+  if (!moveLocked) {
+    if (keyCode === 37 && direction !== directions.right) {
+      direction = directions.left;
+      moveLocked = true;
+    }
+    if (keyCode === 38 && direction !== directions.down) {
+      direction = directions.up;
+      moveLocked = true;
+    }
+    if (keyCode === 39 && direction !== directions.left) {
+      direction = directions.right;
+      moveLocked = true;
+    }
+    if (keyCode === 40 && direction !== directions.up) {
+      direction = directions.down;
+      moveLocked = true;
+    }
   }
 }
 
