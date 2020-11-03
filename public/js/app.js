@@ -33,6 +33,22 @@ const foodPosition = {
   y: 400,
 };
 
+function drawFood(context, snake = []) {
+  const foodPositionX = Math.round((Math.random() * 10));
+  const foodPositionY = Math.round((Math.random() * 10));
+
+  foodPosition.x = foodPositionX * size;
+  foodPosition.y = foodPositionY * size;
+  console.log(foodPosition)
+  context.fillStyle = 'green';
+  context.fillRect(
+    foodPositionX * size,
+    foodPositionY * size,
+    size,
+    size,
+  );
+}
+
 function drawSnake(context) {
   context.canvas.width = window.innerWidth;
   context.canvas.height = window.innerHeight;
@@ -73,6 +89,7 @@ function drawSnake(context) {
     if (!(head.x === foodPosition.x && head.y === foodPosition.y)) {
       snake = snake.splice(1);
     } else {
+      console.log('eating')
       drawFood(context, snake);
     }
   }, interval);
@@ -83,34 +100,18 @@ function handleKeys({ keyCode = 0 }) {
   if (keyCode === 32) {
     clearInterval(timer);
   }
-  if (keyCode === 37) {
-    direction = 'left';
+  if (keyCode === 37 && direction !== directions.right) {
+    direction = directions.left;
   }
-  if (keyCode === 38) {
-    direction = 'up';
+  if (keyCode === 38 && direction !== directions.down) {
+    direction = directions.up;
   }
-  if (keyCode === 39) {
-    direction = 'right';
+  if (keyCode === 39 && direction !== directions.left) {
+    direction = directions.right;
   }
-  if (keyCode === 40) {
-    direction = 'down';
+  if (keyCode === 40 && direction !== directions.up) {
+    direction = directions.down;
   }
-}
-
-function drawFood(context, snake = []) {
-  const foodPositionX = Math.round((Math.random() * 10));
-  const foodPositionY = Math.round((Math.random() * 10));
-
-  foodPosition.x = foodPositionX;
-  foodPosition.y = foodPositionY;
-  console.log(foodPosition)
-  // context.fillStyle = 'red';
-  context.fillRect(
-    foodPositionX,
-    foodPositionY,
-    size,
-    size,
-  );
 }
 
 $(document).ready(() => {
