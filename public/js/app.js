@@ -48,6 +48,7 @@ function drawSnake(context) {
       size,
     ));
     const head = { ...snake[snake.length - 1] };
+
     if (direction === directions.right) {
       head.x = head.x + size;
     }
@@ -67,7 +68,13 @@ function drawSnake(context) {
       size,
       size,
     );
-    snake = snake.splice(1);
+
+    // check if food is eaten
+    if (!(head.x === foodPosition.x && head.y === foodPosition.y)) {
+      snake = snake.splice(1);
+    } else {
+      drawFood(context, snake);
+    }
   }, interval);
 }
 
@@ -90,11 +97,17 @@ function handleKeys({ keyCode = 0 }) {
   }
 }
 
-function drawFood(context) {
-  context.fillStyle = 'green';
+function drawFood(context, snake = []) {
+  const foodPositionX = Math.round((Math.random() * 10));
+  const foodPositionY = Math.round((Math.random() * 10));
+
+  foodPosition.x = foodPositionX;
+  foodPosition.y = foodPositionY;
+  console.log(foodPosition)
+  // context.fillStyle = 'red';
   context.fillRect(
-    foodPosition.x,
-    foodPosition.y,
+    foodPositionX,
+    foodPositionY,
     size,
     size,
   );
