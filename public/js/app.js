@@ -44,7 +44,7 @@ const snake = new Snake([
 
 let timer;
 
-let interval = 150;
+let interval = 100;
 
 let score = 0;
 
@@ -61,7 +61,7 @@ let moveLocked = false;
  * @param {Snake} snake - snake segments
  * @returns {void}
  */
-function drawFood(context, snake = []) {
+function drawFood(context, snake) {
   const { x =  0, y = 0 } = generateFoodPosition(snake.segments);
 
   foodPosition.updatePoint({
@@ -141,9 +141,9 @@ function runGame(context) {
     snake.add(head);
 
     // check field border collision
-    if (head.x > fieldSize.width * size
+    if (head.x > (fieldSize.width - 1) * size
       || head.x < 0
-      || head.y > fieldSize.height * size
+      || head.y > (fieldSize.height - 1) * size
       || head.y < 0) {
       clearInterval(timer);
     }
@@ -172,6 +172,7 @@ function handleKeys({ keyCode = 0 }) {
   // TODO: remove this
   if (keyCode === 32) {
     clearInterval(timer);
+    timer = null;
   }
   if (!moveLocked) {
     if (keyCode === 37 && direction !== directions.right) {
@@ -196,6 +197,6 @@ function handleKeys({ keyCode = 0 }) {
 $(document).ready(() => {
   const context = $('#canvas')[0].getContext('2d');
   runGame(context);
-  drawFood(context);
+  drawFood(context, snake);
   $(document).on('keydown', handleKeys);
 });
