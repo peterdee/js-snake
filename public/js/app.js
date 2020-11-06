@@ -199,4 +199,9 @@ $(document).ready(() => {
   runGame(context);
   drawFood(context, snake);
   $(document).on('keydown', handleKeys);
+  $('#highscores').on('click', () => {
+    highscores();
+    clearInterval(timer);
+    timer = null;
+  });
 });
