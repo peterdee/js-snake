@@ -1,13 +1,46 @@
-body {
-  padding: 50px;
+* {
+  box-sizing: border-box;
+  color: #191919;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
-
 a {
   color: #00B7FF;
 }
-
 canvas {
   background-color: #f0f0f0;
   margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+.direction-column {
+  flex-direction: column;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.mb-16 {
+  margin-bottom: 16px;
+}
+.ml-8 {
+  margin-left: 8px;
+}
+.text-center {
+  text-align: center;
+}
+
+.wrap {
+  margin: 0 auto;
+  min-height: calc(100vh - 24px);
+  width: 500px;
+}
+.title {
+  font-size: 24;
+  font-weight: 600;
+}
+.footer {
+  height: 24px;
 }

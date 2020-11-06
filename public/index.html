@@ -8,8 +8,24 @@
     <title>JS Snake</title>
   </head>
   <body>
-    <div id="root"></div>
-    <canvas id="canvas"></canvas>
-    <div id="score">0</div>
+    <div class="flex direction-column justify-content-center wrap">
+      <h1 class="text-center title mb-16">JS Snake</h1>
+      <canvas
+        class="mb-16"
+        id="canvas"
+      ></canvas>
+      <div class="flex">
+        <div>Score:</div>
+        <div
+          class="ml-8"
+          id="score"
+        >
+          0
+        </div>
+      </div>
+    </div>
+    <footer class="footer text-center">
+      By <a href="https://github.com/peterdee">Peter Dyumin</a>, 2020
+    </footer>
   </body>
 </html>
