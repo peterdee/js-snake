@@ -1,5 +1,5 @@
 /**
- * Show highscores
+ * Show Highscores modal
  * @returns {Promise<*>}
  */
 async function highscores() {
