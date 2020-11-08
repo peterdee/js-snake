@@ -204,4 +204,9 @@ $(document).ready(() => {
     clearInterval(timer);
     timer = null;
   });
+  $('#about').on('click', () => {
+    highscores();
+    clearInterval(timer);
+    timer = null;
+  });
 });
