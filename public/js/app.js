@@ -1,4 +1,5 @@
 let direction = directions.right;
+let started = false;
 
 class Point {
   constructor({ x = 0, y = 0 }) {
@@ -69,7 +70,6 @@ function drawFood(context, snake) {
     y: y * size,
   });
 
-  context.fillStyle = 'green';
   return context.fillRect(
     foodPosition.x,
     foodPosition.y,
@@ -106,11 +106,6 @@ const updateScore = (score = 0) => $('#score').empty().append(score);
  * @returns {void}
  */
 function runGame(context) {
-  context.canvas.height = fieldSize.height * size;
-  context.canvas.width = fieldSize.width * size;
-
-  context.fillStyle = 'green';
-
   timer = setInterval(() => {
     drawSnake(context, snake);
     const { segments } = snake;
@@ -168,9 +163,28 @@ function runGame(context) {
   }, interval);
 }
 
-function handleKeys({ keyCode = 0 }) {
-  // TODO: remove this
+/**
+ * Handle keys
+ * @param {{ keyCode: number }} keyCode - key code  
+ * @param {CanvasRenderingContext2D} context - canvas context
+ * @returns {*}
+ */
+function handleKeys({ keyCode = 0 }, context) {
   if (keyCode === 32) {
+    if (!started) {
+      context.clearRect(
+        0,
+        0,
+        fieldSize.height * size,
+        fieldSize.width * size,
+      );
+      started = true;
+      drawFood(context, snake);
+      return runGame(context);
+    }
+    if (!timer) {
+      return runGame(context);
+    }
     clearInterval(timer);
     timer = null;
   }
@@ -194,11 +208,30 @@ function handleKeys({ keyCode = 0 }) {
   }
 }
 
+/**
+ * Show the start message
+ * @param {CanvasRenderingContext2D} context - canvas context
+ * @returns {void}
+ */
+function showStart(context) {
+  context.font = "30px bold";
+  context.textAlign = 'center';
+  context.fillText('Press "Space" to start', canvas.width / 2, canvas.height / 2);
+}
+
+/**
+ * Handle page loading
+ */
 $(document).ready(() => {
   const context = $('#canvas')[0].getContext('2d');
-  runGame(context);
-  drawFood(context, snake);
-  $(document).on('keydown', handleKeys);
+
+  context.canvas.height = fieldSize.height * size;
+  context.canvas.width = fieldSize.width * size;
+
+  context.fillStyle = 'green';
+  showStart(context);
+
+  $(document).on('keydown', (event) => handleKeys(event, context));
   $('#highscores').on('click', () => {
     highscores();
     clearInterval(timer);

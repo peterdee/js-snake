@@ -30,6 +30,9 @@ canvas {
 .justify-content-center {
   justify-content: center;
 }
+.fs-18 {
+  font-size: 18px;
+}
 .mb-16 {
   margin-bottom: 16px;
 }
@@ -47,6 +50,13 @@ canvas {
 }
 .text-center {
   text-align: center;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .wrap {
