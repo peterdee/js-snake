@@ -5,6 +5,7 @@
     <script src="/js/constants.js"></script>
     <script src="/js/utilities.js"></script>
     <script src="/js/highscores.js"></script>
+    <script src="/js/crash.js"></script>
     <script src="/js/app.js"></script>
     <title>JS Snake</title>
   </head>
@@ -35,14 +36,17 @@
         class="mb-16"
         id="canvas"
       ></canvas>
-      <div class="flex">
-        <div class="fs-18">Score:</div>
-        <div
-          class="fs-18 ml-8"
-          id="score"
-        >
-          0
+      <div class="flex justify-content-between">
+        <div class="flex">
+          <div class="fs-18">Score:</div>
+          <div
+            class="fs-18 ml-8"
+            id="score"
+          >
+            0
+          </div>
         </div>
+        <div class="fs-18" id="is-paused"></div>
       </div>
     </div>
     <footer class="footer text-center">

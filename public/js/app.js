@@ -118,6 +118,8 @@ function runGame(context) {
     segments.slice(0, segments.length - 2).forEach((square) => {
       if (head.x === square.x && head.y === square.y) {
         clearInterval(timer);
+        timer = null;
+        crash(score);
       }
     });
 
@@ -141,6 +143,8 @@ function runGame(context) {
       || head.y > (fieldSize.height - 1) * size
       || head.y < 0) {
       clearInterval(timer);
+      timer = null;
+      crash(score);
     }
 
     context.clearRect(
@@ -183,10 +187,12 @@ function handleKeys({ keyCode = 0 }, context) {
       return runGame(context);
     }
     if (!timer) {
+      $('#is-paused').empty();
       return runGame(context);
     }
     clearInterval(timer);
     timer = null;
+    $('#is-paused').empty().append('The game is paused');
   }
   if (!moveLocked) {
     if (keyCode === 37 && direction !== directions.right) {

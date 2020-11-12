@@ -32,7 +32,7 @@ async function highscores() {
     // load highscores
     const { data = [] } = await $.ajax({
       method: 'GET',
-      url: 'http://localhost:7111/api/highscores',
+      url: `${BACKEND_URI}/api/highscores`,
     });
 
     // display the data

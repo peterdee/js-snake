@@ -1,3 +1,6 @@
+// default backend URI
+const BACKEND_URI = 'http://localhost:7111';
+
 // movement direction
 const directions = {
   down: 'down',

@@ -1,6 +1,10 @@
 :root {
   --accent: #FF9700;
   --accent-hover: #ce800a;
+  --success: #97BF00;
+  --success-hover: #809E0A;
+  --error: #AF2900;
+  --error-hover: #FF5000;
 }
 
 * {
@@ -120,4 +124,26 @@ canvas {
 .button:hover {
   background-color: var(--accent-hover);
   transition: background-color 200ms ease-in-out;
+}
+.crash-modal {
+  height: 316px;
+  top: calc(50% - 158px);
+}
+.success {
+  background-color: var(--success);
+}
+.success:hover {
+  background-color: var(--success-hover);
+}
+.input {
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  padding: 16px;
+  width: 100%;
+}
+.form-error {
+  color: var(--error);
+  height: 20px;
 }
