@@ -38,7 +38,7 @@ async function highscores() {
     // display the data
     $('#hs-content').empty();
     data.forEach((item) => $('#hs-content').append(`
-      <div class="flex hs-row" id="${item.id}">
+      <div class="flex hs-row" id="${item._id['$oid']}">
         <div class="hs-col">${item.name}</div>
         <div class="hs-col">${item.score}</div>
       </div>

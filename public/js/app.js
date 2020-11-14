@@ -1,4 +1,3 @@
-let direction = directions.right;
 let started = false;
 
 class Point {
@@ -15,6 +14,8 @@ class Point {
 
 class Snake {
   constructor(initialState = [new Point({ x: 0, y: 0 })]) {
+    this.direction = directions.right;
+    this.locked = false;
     this.segments = [...initialState];
   }
 
@@ -24,6 +25,18 @@ class Snake {
 
   remove() {
     this.segments = this.segments.slice(1);
+  }
+
+  lockDirection() {
+    this.locked = true;
+  }
+
+  unlockDirection() {
+    this.locked = false;
+  }
+
+  setDirection(direction = '') {
+    this.direction = direction;
   }
 }
 
@@ -53,8 +66,6 @@ const foodPosition = new Point({
   x: 0,
   y: 0,
 });
-
-let moveLocked = false;
 
 /**
  * Draw food square
@@ -123,16 +134,16 @@ function runGame(context) {
       }
     });
 
-    if (direction === directions.right) {
+    if (snake.direction === directions.right) {
       head.x = head.x + size;
     }
-    if (direction === directions.down) {
+    if (snake.direction === directions.down) {
       head.y = head.y + size;
     }
-    if (direction === directions.left) {
+    if (snake.direction === directions.left) {
       head.x = head.x - size;
     }
-    if (direction === directions.up) {
+    if (snake.direction === directions.up) {
       head.y = head.y - size;
     }
     snake.add(head);
@@ -163,7 +174,7 @@ function runGame(context) {
       drawFood(context, snake);
     }
 
-    moveLocked = false;
+    snake.unlockDirection();
   }, interval);
 }
 
@@ -194,22 +205,22 @@ function handleKeys({ keyCode = 0 }, context) {
     timer = null;
     $('#is-paused').empty().append('The game is paused');
   }
-  if (!moveLocked) {
-    if (keyCode === 37 && direction !== directions.right) {
-      direction = directions.left;
-      moveLocked = true;
+  if (!snake.locked) {
+    if (keyCode === 37 && snake.direction !== directions.right) {
+      snake.setDirection(directions.left);
+      snake.lockDirection();
     }
-    if (keyCode === 38 && direction !== directions.down) {
-      direction = directions.up;
-      moveLocked = true;
+    if (keyCode === 38 && snake.direction !== directions.down) {
+      snake.setDirection(directions.up);
+      snake.lockDirection();
     }
-    if (keyCode === 39 && direction !== directions.left) {
-      direction = directions.right;
-      moveLocked = true;
+    if (keyCode === 39 && snake.direction !== directions.left) {
+      snake.setDirection(directions.right);
+      snake.lockDirection();
     }
-    if (keyCode === 40 && direction !== directions.up) {
-      direction = directions.down;
-      moveLocked = true;
+    if (keyCode === 40 && snake.direction !== directions.up) {
+      snake.setDirection(directions.down);
+      snake.lockDirection();
     }
   }
 }

@@ -14,8 +14,10 @@ const generateFoodPosition = (segments = [new Point({ x: 0, y: 0 })]) => {
   const foodPositionX = X === 50 ? 49 : X;
   const foodPositionY = Y === 50 ? 49 : Y;
   let reroll = false;
+  console.log('food', foodPositionX, foodPositionY, snake.segments.slice(-1));
   segments.forEach((segment) => {
     if (foodPositionX === segment.x && foodPositionY === segment.y) {
+      console.log('reroll', snake.segments);
       reroll = true;
     }
   });

@@ -22,7 +22,7 @@ async function handleForm(event, score = 0) {
 
   // publish the score
   try {
-    const response = await $.ajax({
+    await $.ajax({
       data: JSON.stringify({
         name: trimmedName,
         score: String(score),
@@ -30,6 +30,9 @@ async function handleForm(event, score = 0) {
       method: 'POST',
       url: `${BACKEND_URI}/api/highscores`,
     });
+
+    // store player name in the localStorage
+    localStorage.setItem('name', name);
 
     // refresh the window
     return window.location.reload();
