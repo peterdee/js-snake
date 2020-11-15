@@ -1,6 +1,10 @@
 ## js-snake
 
-A simple Snake game
+A simple Snake game with HTML canvas
+
+Stack: [jQuery](https://jquery.com), [Express](https://expressjs.com)
+
+DEV: http://localhost:1100
 
 ### Deploy
 
