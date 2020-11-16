@@ -1,5 +1,5 @@
 // default backend URI
-const BACKEND_URI = 'http://localhost:7111';
+const BACKEND_URI = 'https://deno-snake.herokuapp.com';
 
 // movement direction
 const directions = {
