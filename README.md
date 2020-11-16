@@ -1,10 +1,12 @@
 ## js-snake
 
-A simple Snake game with HTML canvas
+A simple Snake game
 
 Stack: [jQuery](https://jquery.com), [Express](https://expressjs.com)
 
 DEV: http://localhost:1100
+
+STAGE: https://js-snake-jquery.herokuapp.com
 
 ### Deploy
 
@@ -18,5 +20,9 @@ npm i
 ### Launch
 
 ```shell script
-npm start
+npm run dev
 ```
+
+### Heroku
+
+The `stage` branch is auto-deployed to Heroku
