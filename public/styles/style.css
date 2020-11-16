@@ -37,6 +37,9 @@ canvas {
 .fs-18 {
   font-size: 18px;
 }
+.h100 {
+  height: 100%;
+}
 .mb-16 {
   margin-bottom: 16px;
 }

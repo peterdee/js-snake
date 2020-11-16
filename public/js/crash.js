@@ -82,17 +82,17 @@ async function crash(score = 0) {
         ></div>
         <div class="flex justify-content-between">
           <button
-            class="button success pointer"
-            type="submit"
-          >
-            Publish
-          </button>
-          <button
             class="button pointer"
             id="crash-close"
             type="button"
           >
             Cancel
+          </button>
+          <button
+            class="button success pointer"
+            type="submit"
+          >
+            Publish
           </button>
         </div>
       </form>

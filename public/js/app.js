@@ -252,11 +252,17 @@ $(document).ready(() => {
   $('#highscores').on('click', () => {
     highscores();
     clearInterval(timer);
+    if (started) {
+      $('#is-paused').empty().append('The game is paused');
+    }
     timer = null;
   });
   $('#about').on('click', () => {
-    highscores();
+    about();
     clearInterval(timer);
+    if (started) {
+      $('#is-paused').empty().append('The game is paused');
+    }
     timer = null;
   });
 });
