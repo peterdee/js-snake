@@ -1,12 +1,16 @@
 ## js-snake
 
-A simple Snake game
+A simple Snake game.
 
 Stack: [jQuery](https://jquery.com), [Express](https://expressjs.com)
 
 DEV: http://localhost:1100
 
 STAGE: https://js-snake-jquery.herokuapp.com
+
+Backend repository: https://github.com/peterdee/deno-snake
+
+Backend endpoint: https://deno-snake.herokuapp.com
 
 ### Deploy
 
@@ -25,4 +29,4 @@ npm run dev
 
 ### Heroku
 
-The `stage` branch is auto-deployed to Heroku
+The `stage` branch is auto-deployed to Heroku.
